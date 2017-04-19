@@ -40,6 +40,7 @@ _site/
 git.properties
 
 deprecated/
+**/src/main/docker/Dockerfile
 **/src/site/markdown/README.md
 **/src/site/markdown/src/readme
 **/src/site/resources
