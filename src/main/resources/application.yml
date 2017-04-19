@@ -1,0 +1,104 @@
+
+logging.level.: ${LOGGING_LEVEL_:INFO}
+logging:
+  file: ${LOGGING_FILE:yrd-eureka}.log
+  path: ${LOGGING_PATH:${user.home}/data/yrd-eureka/logs}
+  level:
+    jndi: ${LOGGING_LEVEL_:INFO}
+    org.eclipse.jetty: ${LOGGING_LEVEL_:INFO}
+    org.eclipse.jetty.jndi: ${LOGGING_LEVEL_:INFO}
+    org.eclipse.jetty.server.session: ${LOGGING_LEVEL_:INFO}
+    org.eclipse.jetty.util.DecoratedObjectFactory: ${LOGGING_LEVEL_:INFO}
+    org.springframework.beans.factory.annotation.InjectionMetadata: ${LOGGING_LEVEL_:INFO}
+    org.springframework.beans.factory.support.DefaultListableBeanFactory: ${LOGGING_LEVEL_:INFO}
+    org.springframework.core.env.MutablePropertySources: ${LOGGING_LEVEL_:INFO}
+    org.springframework.core.env.PropertySourcesPropertyResolver: ${LOGGING_LEVEL_:INFO}
+    org.springframework.jndi: ${LOGGING_LEVEL_:INFO}
+    org.springframework.core.type.classreading.AnnotationAttributesReadingVisitor: INFO
+    org.springframework.web.context.support.StandardServletEnvironment: ${LOGGING_LEVEL_:INFO}
+    springfox.documentation.spring.web.readers.operation.CachingOperationNameGenerator: OFF
+
+security:
+  basic:
+    enabled: ${SECURITY_BASIC_ENABLED:false}
+  user:
+    name: ${SECURITY_USER_NAME:user}
+    password: ${SECURITY_USER_PASSWORD:user_pass}
+
+server.port: ${SERVER_PORT:8761}
+
+spring.cloud:
+  client.hostname: ${SPRING_CLOUD_CLIENT_HOSTNAME:} #:local-eureka
+  client.ip-address: ${SPRING_CLOUD_CLIENT_IP_ADDRESS:} #:127.0.0.1
+  inetutils:
+    ignoredInterfaces:
+      - docker0
+      - eno.*
+      - tun.*
+      - veth.*
+      - virbr.*
+
+# bug: https://github.com/spring-cloud/spring-cloud-netflix/issues/788
+
+# every instance in cluster must ues same spring.application.name
+# Peer Awareness Mode: 'eureka-cluster'
+# Standalone Mode: 'eureka-standalone'
+spring.application.name: ${SPRING_APPLICATION_NAME:eureka-standalone}
+
+eureka:
+  client:
+    fetch-registry: ${EUREKA_CLIENT_FETCHREGISTRY:false}
+    register-with-eureka: ${EUREKA_CLIENT_REGISTERWITHEUREKA:false}
+    service-url:
+      # Peer Awareness Mode: eureka.client.service-url.defaultZone's hosts affect DS Replicas value on dashboard
+      # Standalone Mode: Notice that the serviceUrl is pointing to the same host as the local instance.
+      # Note: must use 'defaultZone' here, otherwise cluster peers can not find replicas (can not see each other).
+      defaultZone: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE:http://${security.user.name}:${security.user.password}@${EUREKA_INSTANCE_HOSTNAME:local-eureka}:${server.port}/eureka/}
+
+  instance:
+    # eureka.instance.hostname affect Status->instances's url href (not text) value on dashboard
+    hostname: ${EUREKA_INSTANCE_HOSTNAME:local-eureka}
+    # eureka.instance.instance-id affect Status->instances's url text (not href) value on dashboard
+    # or spring.cloud.client.ip-address if eureka.instance.prefer-ip-address=true
+    #instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${EUREKA_INSTANCE_NONSECUREPORT:${SERVER_PORT:8761}}:${random.value}
+    #instance-id: ${spring.cloud.client.hostname}:${spring.application.name}:${EUREKA_INSTANCE_NONSECUREPORT:${SERVER_PORT:8761}}:${random.value}
+    instance-id: ${spring.cloud.client.hostname}:eureka-${PEER:standalone}:${EUREKA_INSTANCE_NONSECUREPORT:${SERVER_PORT:8761}}:${random.value}
+    ip-address: ${EUREKA_INSTANCE_IP_ADDRESS:}
+    # eureka.instance.non-secure-port affect Status->instances's url href (not text) value on dashboard
+    non-secure-port: ${EUREKA_INSTANCE_NONSECUREPORT:8761}
+    non-secure-port-enabled: true
+    prefer-ip-address: ${EUREKA_INSTANCE_PREFER_IP_ADDRESS:false}
+    #metadataMap:
+      #hostname: ${EUREKA_INSTANCE_HOSTNAME:127.0.0.1}
+      #prot: ${EUREKA_INSTANCE_NONSECUREPORT:8761}
+      #instanceId: ${spring.cloud.client.hostname}:${spring.application.name}:${EUREKA_INSTANCE_NONSECUREPORT:${SERVER_PORT:8761}}
+      # or spring.cloud.client.ip-address if eureka.instance.prefer-ip-address=true
+      #instanceId: ${spring.cloud.client.ip-address}:${spring.application.name}:${EUREKA_INSTANCE_NONSECUREPORT:${SERVER_PORT:8761}}
+      # never set instance-id like these.
+      #instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+      #instanceId: ${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${server.port}}}
+      #instanceId: ${EUREKA_INSTANCE_ID:${spring.application.name}:${spring.application.instance_id:${server.port}}}
+    #registryFetchIntervalSeconds: 30
+    #leaseRenewalIntervalInSeconds: 3
+    #leaseExpirationDurationInSeconds: 5
+#  server:
+#    enableSelfPreservation: false
+#    waitTimeInMsWhenSyncEmpty: 0 # set to 0 will break cluster
+
+---
+spring:
+  profiles: development.env
+
+# empty profile
+
+---
+spring:
+  profiles: it.env
+
+# empty profile
+
+---
+spring:
+  profiles: production.env
+
+# empty profile

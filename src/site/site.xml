@@ -1,0 +1,15 @@
+<project>
+
+    <body>
+        <menu ref="parent" />
+        <menu name="DOCUMENTATION">
+            <item href="README.html" name="README" />
+            <item href="CONTRIBUTION.html" name="开发" />
+            <item href="GRACEFUL_SHUTDOWN.html" name="优雅关闭服务" />
+            <item href="SELF_PRESERVATION.html" name="自我保护模式" />
+            <item href="PERFORMANCE.html" name="压力测试" />
+        </menu>
+        <menu ref="modules" />
+        <menu ref="reports" inherit="bottom" />
+    </body>
+</project>
