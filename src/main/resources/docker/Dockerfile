@@ -1,6 +1,5 @@
 
 FROM ${docker.registry}/java:oracle-8u101-jdk-alpine
-MAINTAINER haolunzhang@yirendai.com
 
 VOLUME /tmp
 VOLUME ["/root/data"]

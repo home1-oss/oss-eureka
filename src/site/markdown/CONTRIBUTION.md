@@ -31,23 +31,23 @@
     -v $(pwd):/root/app \
     -p ${EUREKA_INSTANCE_NONSECUREPORT}:8761 \
     --name eureka-${PEER} \
-    --hostname eureka-${PEER}.infra.yixinonline.org \
+    --hostname eureka-${PEER}.internal \
     -e SPRING_PROFILES_ACTIVE=cloud,${PEER} \
-    -e EUREKA_INSTANCE_HOSTNAME=eureka-${PEER}.infra.yixinonline.org \
+    -e EUREKA_INSTANCE_HOSTNAME=eureka-${PEER}.internal \
     -e EUREKA_INSTANCE_PREFER_IP_ADDRESS=false \
     -e EUREKA_INSTANCE_IP_ADDRESS=${HOST_IP_ADDRESS} \
-    -e CLOUD_CLIENT_HOSTNAME=eureka-${PEER}.infra.yixinonline.org \
+    -e CLOUD_CLIENT_HOSTNAME=eureka-${PEER}.internal \
     -e CLOUD_CLIENT_IP_ADDRESS=${HOST_IP_ADDRESS} \
     -e SERVER_PORT=8761 \
     -e EUREKA_INSTANCE_NONSECUREPORT=${EUREKA_INSTANCE_NONSECUREPORT} \
-    -e EUREKA_PEER1_HOST=eureka-peer1.infra.yixinonline.org \
+    -e EUREKA_PEER1_HOST=eureka-peer1.internal \
     -e EUREKA_PEER1_PORT=${EUREKA_PEER1_PORT} \
-    -e EUREKA_PEER2_HOST=eureka-peer2.infra.yixinonline.org \
+    -e EUREKA_PEER2_HOST=eureka-peer2.internal \
     -e EUREKA_PEER2_PORT=${EUREKA_PEER2_PORT} \
-    -e EUREKA_PEER3_HOST=eureka-peer3.infra.yixinonline.org \
+    -e EUREKA_PEER3_HOST=eureka-peer3.internal \
     -e EUREKA_PEER3_PORT=${EUREKA_PEER3_PORT} \
-    --add-host eureka-peer1.infra.yixinonline.org:${EUREKA_PEER1_IP_ADDRESS} \
-    --add-host eureka-peer2.infra.yixinonline.org:${EUREKA_PEER2_IP_ADDRESS} \
-    --add-host eureka-peer3.infra.yixinonline.org:${EUREKA_PEER3_IP_ADDRESS} \
+    --add-host eureka-peer1.internal:${EUREKA_PEER1_IP_ADDRESS} \
+    --add-host eureka-peer2.internal:${EUREKA_PEER2_IP_ADDRESS} \
+    --add-host eureka-peer3.internal:${EUREKA_PEER3_IP_ADDRESS} \
     registry.docker.local/java:oracle-8u101-jdk-alpine \
     "${PEER}"

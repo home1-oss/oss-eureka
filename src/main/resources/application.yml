@@ -1,8 +1,8 @@
 
 logging.level.: ${LOGGING_LEVEL_:INFO}
 logging:
-  file: ${LOGGING_FILE:yrd-eureka}.log
-  path: ${LOGGING_PATH:${user.home}/data/yrd-eureka/logs}
+  file: ${LOGGING_FILE:oss-eureka}.log
+  path: ${LOGGING_PATH:${user.home}/data/oss-eureka/logs}
   level:
     jndi: ${LOGGING_LEVEL_:INFO}
     org.eclipse.jetty: ${LOGGING_LEVEL_:INFO}
