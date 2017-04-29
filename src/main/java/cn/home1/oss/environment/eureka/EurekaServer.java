@@ -1,4 +1,4 @@
-package com.yirendai.oss.environment.eureka;
+package cn.home1.oss.environment.eureka;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
