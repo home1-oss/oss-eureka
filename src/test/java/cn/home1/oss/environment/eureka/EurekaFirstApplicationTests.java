@@ -1,4 +1,4 @@
-package com.yirendai.oss.environment.eureka;
+package cn.home1.oss.environment.eureka;
 
 import static org.junit.Assert.assertTrue;
 
