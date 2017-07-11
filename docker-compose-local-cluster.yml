@@ -16,8 +16,8 @@ services:
     ports:
     - "8761:8761"
     volumes:
-    - eureka-peer1.local-volume:/root/data
-    - eureka-peer1.local-volume:/tmp
+    - volume-eureka-peer1.local:/root/data
+    - volume-eureka-peer1.local:/tmp
     environment:
     - EUREKA_CLIENT_FETCHREGISTRY=true
     - EUREKA_CLIENT_REGISTERWITHEUREKA=true
@@ -48,8 +48,8 @@ services:
     ports:
     - "8762:8761"
     volumes:
-    - eureka-peer2.local-volume:/root/data
-    - eureka-peer2.local-volume:/tmp
+    - volume-eureka-peer2.local:/root/data
+    - volume-eureka-peer2.local:/tmp
     environment:
     - EUREKA_CLIENT_FETCHREGISTRY=true
     - EUREKA_CLIENT_REGISTERWITHEUREKA=true
@@ -80,8 +80,8 @@ services:
     ports:
     - "8763:8761"
     volumes:
-    - eureka-peer3.local-volume:/root/data
-    - eureka-peer3.local-volume:/tmp
+    - volume-eureka-peer3.local:/root/data
+    - volume-eureka-peer3.local:/tmp
     environment:
     - EUREKA_CLIENT_FETCHREGISTRY=true
     - EUREKA_CLIENT_REGISTERWITHEUREKA=true
@@ -105,9 +105,9 @@ services:
     - "eureka-peer3.local:${HOST_IP_ADDRESS}"
 
 volumes:
-  eureka-peer1.local-volume: {}
-  eureka-peer2.local-volume: {}
-  eureka-peer3.local-volume: {}
+  volume-eureka-peer1.local: {}
+  volume-eureka-peer2.local: {}
+  volume-eureka-peer3.local: {}
 
 networks:
   default:
