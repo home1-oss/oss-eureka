@@ -16,8 +16,8 @@ services:
     ports:
     - "${EUREKA_INSTANCE_NONSECUREPORT:-8761}:8761"
     volumes:
-    - eureka.local-volume:/root/data
-    - eureka.local-volume:/tmp
+    - volume-eureka:/root/data
+    - volume-eureka:/tmp
     environment:
     - EUREKA_CLIENT_FETCHREGISTRY=false
     - EUREKA_CLIENT_REGISTERWITHEUREKA=false
@@ -37,7 +37,7 @@ services:
     - SPRING_PROFILES_ACTIVE=development.env
 
 volumes:
-  eureka.local-volume: {}
+  volume-eureka: {}
 
 networks:
   default:
