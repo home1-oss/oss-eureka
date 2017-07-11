@@ -49,5 +49,5 @@
     --add-host eureka-peer1.internal:${EUREKA_PEER1_IP_ADDRESS} \
     --add-host eureka-peer2.internal:${EUREKA_PEER2_IP_ADDRESS} \
     --add-host eureka-peer3.internal:${EUREKA_PEER3_IP_ADDRESS} \
-    registry.docker.local/java:oracle-8u101-jdk-alpine \
+    home1oss/java:oracle-8u131-jdk-alpine \
     "${PEER}"

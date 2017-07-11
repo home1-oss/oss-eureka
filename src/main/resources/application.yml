@@ -28,7 +28,7 @@ security:
 server.port: ${SERVER_PORT:8761}
 
 spring.cloud:
-  client.hostname: ${SPRING_CLOUD_CLIENT_HOSTNAME:} #:local-eureka
+  client.hostname: ${SPRING_CLOUD_CLIENT_HOSTNAME:} #:eureka.local
   client.ip-address: ${SPRING_CLOUD_CLIENT_IP_ADDRESS:} #:127.0.0.1
   inetutils:
     ignoredInterfaces:
@@ -53,11 +53,11 @@ eureka:
       # Peer Awareness Mode: eureka.client.service-url.defaultZone's hosts affect DS Replicas value on dashboard
       # Standalone Mode: Notice that the serviceUrl is pointing to the same host as the local instance.
       # Note: must use 'defaultZone' here, otherwise cluster peers can not find replicas (can not see each other).
-      defaultZone: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE:http://${security.user.name}:${security.user.password}@${EUREKA_INSTANCE_HOSTNAME:local-eureka}:${server.port}/eureka/}
+      defaultZone: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE:http://${security.user.name}:${security.user.password}@${EUREKA_INSTANCE_HOSTNAME:eureka.local}:${server.port}/eureka/}
 
   instance:
     # eureka.instance.hostname affect Status->instances's url href (not text) value on dashboard
-    hostname: ${EUREKA_INSTANCE_HOSTNAME:local-eureka}
+    hostname: ${EUREKA_INSTANCE_HOSTNAME:eureka.local}
     # eureka.instance.instance-id affect Status->instances's url text (not href) value on dashboard
     # or spring.cloud.client.ip-address if eureka.instance.prefer-ip-address=true
     #instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${EUREKA_INSTANCE_NONSECUREPORT:${SERVER_PORT:8761}}:${random.value}
