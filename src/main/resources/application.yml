@@ -2,7 +2,7 @@
 logging.level.: ${LOGGING_LEVEL_:INFO}
 logging:
   file: ${LOGGING_FILE:oss-eureka}.log
-  path: ${LOGGING_PATH:${user.home}/data/oss-eureka/logs}
+  path: ${LOGGING_PATH:${user.home}/.oss/oss-eureka/logs}
   level:
     jndi: ${LOGGING_LEVEL_:INFO}
     org.eclipse.jetty: ${LOGGING_LEVEL_:INFO}
