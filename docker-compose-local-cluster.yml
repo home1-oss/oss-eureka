@@ -16,7 +16,7 @@ services:
     ports:
     - "8761:8761"
     volumes:
-    - volume-eureka-peer1.local:/root/data
+    - volume-eureka-peer1.local:/root/.oss
     - volume-eureka-peer1.local:/tmp
     environment:
     - EUREKA_CLIENT_FETCHREGISTRY=true
@@ -48,7 +48,7 @@ services:
     ports:
     - "8762:8761"
     volumes:
-    - volume-eureka-peer2.local:/root/data
+    - volume-eureka-peer2.local:/root/.oss
     - volume-eureka-peer2.local:/tmp
     environment:
     - EUREKA_CLIENT_FETCHREGISTRY=true
@@ -80,7 +80,7 @@ services:
     ports:
     - "8763:8761"
     volumes:
-    - volume-eureka-peer3.local:/root/data
+    - volume-eureka-peer3.local:/root/.oss
     - volume-eureka-peer3.local:/tmp
     environment:
     - EUREKA_CLIENT_FETCHREGISTRY=true

@@ -16,7 +16,7 @@ services:
     ports:
     - "${EUREKA_INSTANCE_NONSECUREPORT:-8761}:8761"
     volumes:
-    - volume-eureka:/root/data
+    - volume-eureka:/root/.oss
     - volume-eureka:/tmp
     environment:
     - EUREKA_CLIENT_FETCHREGISTRY=false
