@@ -17,7 +17,7 @@ import org.apache.commons.configuration.AbstractConfiguration;
  * 目的:
  * 链接EurekaServer并发送N次查询请求<br>
  * 运行举例:
- * java performance.MyClient http://eureka.local:8761/eureka/ 100
+ * java performance.MyClient http://oss-eureka.local:8761/eureka/ 100
  * 第一个参数: EurekaServer注册地址
  * 第二个参数: 查询次数，默认10次
  *
@@ -28,7 +28,7 @@ public class MyClient {
   private static final int ONE = 1;
 
   public static void main(final String... args) {
-    String eurekaUrl = "http://eureka.local:8761/eureka/";
+    String eurekaUrl = "http://oss-eureka.local:8761/eureka/";
     if (args.length > 0) {
       eurekaUrl = args[0];
     }

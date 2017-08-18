@@ -28,7 +28,7 @@ security:
 server.port: ${SERVER_PORT:8761}
 
 spring.cloud:
-  client.hostname: ${SPRING_CLOUD_CLIENT_HOSTNAME:} #:eureka.local
+  client.hostname: ${SPRING_CLOUD_CLIENT_HOSTNAME:} #:oss-eureka.local
   client.ip-address: ${SPRING_CLOUD_CLIENT_IP_ADDRESS:} #:127.0.0.1
   inetutils:
     ignoredInterfaces:

@@ -33,7 +33,7 @@
     --name eureka-${PEER} \
     --hostname eureka-${PEER}.internal \
     -e SPRING_PROFILES_ACTIVE=cloud,${PEER} \
-    -e EUREKA_INSTANCE_HOSTNAME=eureka-${PEER}.internal \
+    -e EUREKA_INSTANCE_HOSTNAME=oss-eureka-${PEER}.internal \
     -e EUREKA_INSTANCE_PREFER_IP_ADDRESS=false \
     -e EUREKA_INSTANCE_IP_ADDRESS=${HOST_IP_ADDRESS} \
     -e CLOUD_CLIENT_HOSTNAME=eureka-${PEER}.internal \

@@ -23,7 +23,7 @@ import java.util.Scanner;
  * 目的:
  * 创建N个Instance链接指定EurekaServer
  * 运行举例:
- * java performance.MyService http://eureka.local:8761/eureka/ 100
+ * java performance.MyService http://oss-eureka.local:8761/eureka/ 100
  * 第一个参数: EurekaServer注册地址
  * 第二个参数: 创建Instance个数，默认1个
  * 按 回车 退出程序
@@ -35,7 +35,7 @@ public class MyService {
   private static final int ONE = 1;
 
   public static void main(final String... args) {
-    String eurekaUrl = "http://eureka.local:8761/eureka/";
+    String eurekaUrl = "http://oss-eureka.local:8761/eureka/";
     if (args.length > 0) {
       eurekaUrl = args[0];
     }
