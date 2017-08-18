@@ -41,9 +41,9 @@ spring.cloud:
 # bug: https://github.com/spring-cloud/spring-cloud-netflix/issues/788
 
 # every instance in cluster must ues same spring.application.name
-# Peer Awareness Mode: 'eureka-cluster'
-# Standalone Mode: 'eureka-standalone'
-spring.application.name: ${SPRING_APPLICATION_NAME:eureka-standalone}
+# Peer Awareness Mode: 'oss-eureka-cluster'
+# Standalone Mode: 'oss-eureka-standalone'
+spring.application.name: ${SPRING_APPLICATION_NAME:oss-eureka-standalone}
 
 eureka:
   client:
@@ -53,16 +53,16 @@ eureka:
       # Peer Awareness Mode: eureka.client.service-url.defaultZone's hosts affect DS Replicas value on dashboard
       # Standalone Mode: Notice that the serviceUrl is pointing to the same host as the local instance.
       # Note: must use 'defaultZone' here, otherwise cluster peers can not find replicas (can not see each other).
-      defaultZone: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE:http://${security.user.name}:${security.user.password}@${EUREKA_INSTANCE_HOSTNAME:eureka.local}:${server.port}/eureka/}
+      defaultZone: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE:http://${security.user.name}:${security.user.password}@${EUREKA_INSTANCE_HOSTNAME:oss-eureka.local}:${server.port}/eureka/}
 
   instance:
     # eureka.instance.hostname affect Status->instances's url href (not text) value on dashboard
-    hostname: ${EUREKA_INSTANCE_HOSTNAME:eureka.local}
+    hostname: ${EUREKA_INSTANCE_HOSTNAME:oss-eureka.local}
     # eureka.instance.instance-id affect Status->instances's url text (not href) value on dashboard
     # or spring.cloud.client.ip-address if eureka.instance.prefer-ip-address=true
     #instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${EUREKA_INSTANCE_NONSECUREPORT:${SERVER_PORT:8761}}:${random.value}
     #instance-id: ${spring.cloud.client.hostname}:${spring.application.name}:${EUREKA_INSTANCE_NONSECUREPORT:${SERVER_PORT:8761}}:${random.value}
-    instance-id: ${spring.cloud.client.hostname}:eureka-${PEER:standalone}:${EUREKA_INSTANCE_NONSECUREPORT:${SERVER_PORT:8761}}:${random.value}
+    instance-id: ${spring.cloud.client.hostname}:oss-eureka-${PEER:standalone}:${EUREKA_INSTANCE_NONSECUREPORT:${SERVER_PORT:8761}}:${random.value}
     ip-address: ${EUREKA_INSTANCE_IP_ADDRESS:}
     # eureka.instance.non-secure-port affect Status->instances's url href (not text) value on dashboard
     non-secure-port: ${EUREKA_INSTANCE_NONSECUREPORT:8761}

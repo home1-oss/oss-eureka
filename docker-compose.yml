@@ -1,28 +1,28 @@
 # Run local standalone node
 #
 # edit '/etc/hosts', add following lines:
-# 127.0.0.1 eureka.local
+# 127.0.0.1 oss-eureka.local
 
 
 
 version: '2.1'
 services:
-  eureka.local:
+  oss-eureka.local:
     image: ${DOCKER_REGISTRY:-home1oss}/oss-eureka:latest
     restart: always
     command: []
-    container_name: ${EUREKA_INSTANCE_HOSTNAME:-eureka.local}
-    hostname: ${EUREKA_INSTANCE_HOSTNAME:-eureka.local}
+    container_name: ${EUREKA_INSTANCE_HOSTNAME:-oss-eureka.local}
+    hostname: ${EUREKA_INSTANCE_HOSTNAME:-oss-eureka.local}
     ports:
     - "${EUREKA_INSTANCE_NONSECUREPORT:-8761}:8761"
     volumes:
-    - volume-eureka:/root/.oss
-    - volume-eureka:/tmp
+    - volume-oss-eureka:/root/.oss
+    - volume-oss-eureka:/tmp
     environment:
     - EUREKA_CLIENT_FETCHREGISTRY=false
     - EUREKA_CLIENT_REGISTERWITHEUREKA=false
-    - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://${SECURITY_USER_NAME:-user}:${SECURITY_USER_PASSWORD:-user_pass}@eureka.local:${SERVER_PORT:-8761}/eureka/
-    - EUREKA_INSTANCE_HOSTNAME=${EUREKA_INSTANCE_HOSTNAME:-eureka.local}
+    - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://${SECURITY_USER_NAME:-user}:${SECURITY_USER_PASSWORD:-user_pass}@oss-eureka.local:${SERVER_PORT:-8761}/eureka/
+    - EUREKA_INSTANCE_HOSTNAME=${EUREKA_INSTANCE_HOSTNAME:-oss-eureka.local}
     #- EUREKA_INSTANCE_IP_ADDRESS=${HOST_IP_ADDRESS:-127.0.0.1}
     - EUREKA_INSTANCE_PREFER_IP_ADDRESS=${EUREKA_INSTANCE_PREFER_IP_ADDRESS:-false}
     - EUREKA_INSTANCE_NONSECUREPORT=${EUREKA_INSTANCE_NONSECUREPORT:-8761}
@@ -31,13 +31,13 @@ services:
     - SECURITY_USER_NAME=${SECURITY_USER_NAME:-user}
     - SECURITY_USER_PASSWORD=${SECURITY_USER_PASSWORD:-user_pass}
     - SERVER_PORT=${SERVER_PORT:-8761}
-    - SPRING_APPLICATION_NAME=eureka-standalone
-    - SPRING_CLOUD_CLIENT_HOSTNAME=${EUREKA_INSTANCE_HOSTNAME:-eureka.local}
+    - SPRING_APPLICATION_NAME=oss-eureka-standalone
+    - SPRING_CLOUD_CLIENT_HOSTNAME=${EUREKA_INSTANCE_HOSTNAME:-oss-eureka.local}
     #- SPRING_CLOUD_CLIENT_IP_ADDRESS=${HOST_IP_ADDRESS:-127.0.0.1}
     - SPRING_PROFILES_ACTIVE=development.env
 
 volumes:
-  volume-eureka: {}
+  volume-oss-eureka: {}
 
 networks:
   default:

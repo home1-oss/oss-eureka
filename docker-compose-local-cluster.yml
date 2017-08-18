@@ -1,28 +1,28 @@
 # Run local cluster on same host (OSX way to get HOST_IP_ADDRESS)
 #
 # edit '/etc/hosts', add following lines:
-# 127.0.0.1 eureka-peer1.local
-# 127.0.0.1 eureka-peer2.local
-# 127.0.0.1 eureka-peer3.local
+# 127.0.0.1 oss-eureka-peer1.local
+# 127.0.0.1 oss-eureka-peer2.local
+# 127.0.0.1 oss-eureka-peer3.local
 # HOST_IP_ADDRESS=$(ipconfig getifaddr en0 || ipconfig getifaddr en1) docker-compose -f docker-compose-local-cluster.yml up
 version: '2.1'
 services:
-  eureka-peer1.local:
+  oss-eureka-peer1.local:
     image: ${DOCKER_REGISTRY:-home1oss}/oss-eureka:latest
     restart: always
     command: []
-    container_name: eureka-peer1.local
-    hostname: eureka-peer1.local
+    container_name: oss-eureka-peer1.local
+    hostname: oss-eureka-peer1.local
     ports:
     - "8761:8761"
     volumes:
-    - volume-eureka-peer1.local:/root/.oss
-    - volume-eureka-peer1.local:/tmp
+    - volume-oss-eureka-peer1.local:/root/.oss
+    - volume-oss-eureka-peer1.local:/tmp
     environment:
     - EUREKA_CLIENT_FETCHREGISTRY=true
     - EUREKA_CLIENT_REGISTERWITHEUREKA=true
-    - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://${SECURITY_USER_NAME:-user}:${SECURITY_USER_PASSWORD:-user_pass}@eureka-peer1.local:8761/eureka/,http://${SECURITY_USER_NAME:-user}:${SECURITY_USER_PASSWORD:-user_pass}@eureka-peer2.local:8762/eureka/,http://${SECURITY_USER_NAME:-user}:${SECURITY_USER_PASSWORD:-user_pass}@eureka-peer3.local:8763/eureka/
-    - EUREKA_INSTANCE_HOSTNAME=eureka-peer1.local
+    - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://${SECURITY_USER_NAME:-user}:${SECURITY_USER_PASSWORD:-user_pass}@oss-eureka-peer1.local:8761/eureka/,http://${SECURITY_USER_NAME:-user}:${SECURITY_USER_PASSWORD:-user_pass}@oss-eureka-peer2.local:8762/eureka/,http://${SECURITY_USER_NAME:-user}:${SECURITY_USER_PASSWORD:-user_pass}@oss-eureka-peer3.local:8763/eureka/
+    - EUREKA_INSTANCE_HOSTNAME=oss-eureka-peer1.local
     - EUREKA_INSTANCE_IP_ADDRESS=${HOST_IP_ADDRESS}
     - EUREKA_INSTANCE_PREFER_IP_ADDRESS=${EUREKA_INSTANCE_PREFER_IP_ADDRESS:-false}
     - EUREKA_INSTANCE_NONSECUREPORT=8761
@@ -31,30 +31,30 @@ services:
     - SECURITY_USER_NAME=${SECURITY_USER_NAME:-user}
     - SECURITY_USER_PASSWORD=${SECURITY_USER_PASSWORD:-user_pass}
     - SERVER_PORT=8761
-    - SPRING_APPLICATION_NAME=eureka-cluster
-    - SPRING_CLOUD_CLIENT_HOSTNAME=eureka-peer1.local
+    - SPRING_APPLICATION_NAME=oss-eureka-cluster
+    - SPRING_CLOUD_CLIENT_HOSTNAME=oss-eureka-peer1.local
     - SPRING_CLOUD_CLIENT_IP_ADDRESS=${HOST_IP_ADDRESS}
     - SPRING_PROFILES_ACTIVE=development.env
     extra_hosts:
-    - "eureka-peer1.local:${HOST_IP_ADDRESS}"
-    - "eureka-peer2.local:${HOST_IP_ADDRESS}"
-    - "eureka-peer3.local:${HOST_IP_ADDRESS}"
-  eureka-peer2.local:
+    - "oss-eureka-peer1.local:${HOST_IP_ADDRESS}"
+    - "oss-eureka-peer2.local:${HOST_IP_ADDRESS}"
+    - "oss-eureka-peer3.local:${HOST_IP_ADDRESS}"
+  oss-eureka-peer2.local:
     image: ${DOCKER_REGISTRY:-home1oss}/oss-eureka:latest
     restart: always
     command: []
-    container_name: eureka-peer2.local
-    hostname: eureka-peer2.local
+    container_name: oss-eureka-peer2.local
+    hostname: oss-eureka-peer2.local
     ports:
     - "8762:8761"
     volumes:
-    - volume-eureka-peer2.local:/root/.oss
-    - volume-eureka-peer2.local:/tmp
+    - volume-oss-eureka-peer2.local:/root/.oss
+    - volume-oss-eureka-peer2.local:/tmp
     environment:
     - EUREKA_CLIENT_FETCHREGISTRY=true
     - EUREKA_CLIENT_REGISTERWITHEUREKA=true
-    - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://${SECURITY_USER_NAME:-user}:${SECURITY_USER_PASSWORD:-user_pass}@eureka-peer1.local:8761/eureka/,http://${SECURITY_USER_NAME:-user}:${SECURITY_USER_PASSWORD:-user_pass}@eureka-peer2.local:8762/eureka/,http://${SECURITY_USER_NAME:-user}:${SECURITY_USER_PASSWORD:-user_pass}@eureka-peer3.local:8763/eureka/
-    - EUREKA_INSTANCE_HOSTNAME=eureka-peer2.local
+    - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://${SECURITY_USER_NAME:-user}:${SECURITY_USER_PASSWORD:-user_pass}@oss-eureka-peer1.local:8761/eureka/,http://${SECURITY_USER_NAME:-user}:${SECURITY_USER_PASSWORD:-user_pass}@oss-eureka-peer2.local:8762/eureka/,http://${SECURITY_USER_NAME:-user}:${SECURITY_USER_PASSWORD:-user_pass}@oss-eureka-peer3.local:8763/eureka/
+    - EUREKA_INSTANCE_HOSTNAME=oss-eureka-peer2.local
     - EUREKA_INSTANCE_IP_ADDRESS=${HOST_IP_ADDRESS}
     - EUREKA_INSTANCE_PREFER_IP_ADDRESS=${EUREKA_INSTANCE_PREFER_IP_ADDRESS:-false}
     - EUREKA_INSTANCE_NONSECUREPORT=8762
@@ -63,30 +63,30 @@ services:
     - SECURITY_USER_NAME=${SECURITY_USER_NAME:-user}
     - SECURITY_USER_PASSWORD=${SECURITY_USER_PASSWORD:-user_pass}
     - SERVER_PORT=8761
-    - SPRING_APPLICATION_NAME=eureka-cluster
-    - SPRING_CLOUD_CLIENT_HOSTNAME=eureka-peer2.local
+    - SPRING_APPLICATION_NAME=oss-eureka-cluster
+    - SPRING_CLOUD_CLIENT_HOSTNAME=oss-eureka-peer2.local
     - SPRING_CLOUD_CLIENT_IP_ADDRESS=${HOST_IP_ADDRESS}
     - SPRING_PROFILES_ACTIVE=development.env
     extra_hosts:
-    - "eureka-peer1.local:${HOST_IP_ADDRESS}"
-    - "eureka-peer2.local:${HOST_IP_ADDRESS}"
-    - "eureka-peer3.local:${HOST_IP_ADDRESS}"
-  eureka-peer3.local:
+    - "oss-eureka-peer1.local:${HOST_IP_ADDRESS}"
+    - "oss-eureka-peer2.local:${HOST_IP_ADDRESS}"
+    - "oss-eureka-peer3.local:${HOST_IP_ADDRESS}"
+  oss-eureka-peer3.local:
     image: ${DOCKER_REGISTRY:-home1oss}/oss-eureka:latest
     restart: always
     command: []
-    container_name: eureka-peer3.local
-    hostname: eureka-peer3.local
+    container_name: oss-eureka-peer3.local
+    hostname: oss-eureka-peer3.local
     ports:
     - "8763:8761"
     volumes:
-    - volume-eureka-peer3.local:/root/.oss
-    - volume-eureka-peer3.local:/tmp
+    - volume-oss-eureka-peer3.local:/root/.oss
+    - volume-oss-eureka-peer3.local:/tmp
     environment:
     - EUREKA_CLIENT_FETCHREGISTRY=true
     - EUREKA_CLIENT_REGISTERWITHEUREKA=true
-    - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://${SECURITY_USER_NAME:-user}:${SECURITY_USER_PASSWORD:-user_pass}@eureka-peer1.local:8761/eureka/,http://${SECURITY_USER_NAME:-user}:${SECURITY_USER_PASSWORD:-user_pass}@eureka-peer2.local:8762/eureka/,http://${SECURITY_USER_NAME:-user}:${SECURITY_USER_PASSWORD:-user_pass}@eureka-peer3.local:8763/eureka/
-    - EUREKA_INSTANCE_HOSTNAME=eureka-peer3.local
+    - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://${SECURITY_USER_NAME:-user}:${SECURITY_USER_PASSWORD:-user_pass}@oss-eureka-peer1.local:8761/eureka/,http://${SECURITY_USER_NAME:-user}:${SECURITY_USER_PASSWORD:-user_pass}@oss-eureka-peer2.local:8762/eureka/,http://${SECURITY_USER_NAME:-user}:${SECURITY_USER_PASSWORD:-user_pass}@oss-eureka-peer3.local:8763/eureka/
+    - EUREKA_INSTANCE_HOSTNAME=oss-eureka-peer3.local
     - EUREKA_INSTANCE_IP_ADDRESS=${HOST_IP_ADDRESS}
     - EUREKA_INSTANCE_PREFER_IP_ADDRESS=${EUREKA_INSTANCE_PREFER_IP_ADDRESS:-false}
     - EUREKA_INSTANCE_NONSECUREPORT=8763
@@ -95,19 +95,19 @@ services:
     - SECURITY_USER_NAME=${SECURITY_USER_NAME:-user}
     - SECURITY_USER_PASSWORD=${SECURITY_USER_PASSWORD:-user_pass}
     - SERVER_PORT=8761
-    - SPRING_APPLICATION_NAME=eureka-cluster
-    - SPRING_CLOUD_CLIENT_HOSTNAME=eureka-peer3.local
+    - SPRING_APPLICATION_NAME=oss-eureka-cluster
+    - SPRING_CLOUD_CLIENT_HOSTNAME=oss-eureka-peer3.local
     - SPRING_CLOUD_CLIENT_IP_ADDRESS=${HOST_IP_ADDRESS}
     - SPRING_PROFILES_ACTIVE=development.env
     extra_hosts:
-    - "eureka-peer1.local:${HOST_IP_ADDRESS}"
-    - "eureka-peer2.local:${HOST_IP_ADDRESS}"
-    - "eureka-peer3.local:${HOST_IP_ADDRESS}"
+    - "oss-eureka-peer1.local:${HOST_IP_ADDRESS}"
+    - "oss-eureka-peer2.local:${HOST_IP_ADDRESS}"
+    - "oss-eureka-peer3.local:${HOST_IP_ADDRESS}"
 
 volumes:
-  volume-eureka-peer1.local: {}
-  volume-eureka-peer2.local: {}
-  volume-eureka-peer3.local: {}
+  volume-oss-eureka-peer1.local: {}
+  volume-oss-eureka-peer2.local: {}
+  volume-oss-eureka-peer3.local: {}
 
 networks:
   default:

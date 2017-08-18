@@ -11,7 +11,7 @@
 
     export EUREKA_VERSION="latest"
     export HOST_IP_ADDRESS="${给EUREKA客户端访问的IP地址}"
-    docker-compose -f docker-compose-eureka-cluster.yml up -d
+    docker-compose -f docker-compose-local-cluster.yml up -d
 
 ### 使用docker 启动集群 (生产环境)
 
