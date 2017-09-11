@@ -16,7 +16,9 @@ logging:
     org.springframework.jndi: ${LOGGING_LEVEL_:INFO}
     org.springframework.core.type.classreading.AnnotationAttributesReadingVisitor: INFO
     org.springframework.web.context.support.StandardServletEnvironment: ${LOGGING_LEVEL_:INFO}
-    springfox.documentation.spring.web.readers.operation.CachingOperationNameGenerator: OFF
+    #Cannot set level: false for 'springfox.documentation.spring.web.readers.operation.CachingOperationNameGenerator
+    #springfox.documentation.spring.web.readers.operation.CachingOperationNameGenerator: OFF
+    springfox.documentation.spring.web.readers.operation.CachingOperationNameGenerator: WARN
 
 security:
   basic:
